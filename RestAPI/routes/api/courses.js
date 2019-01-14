@@ -53,4 +53,13 @@ router.put("/:course_id", (req, res) => {
     res.status(202).json(courses);
 })
 
+router.delete("/:course_id", (req, res) => {
+    let removeCourseId = parseInt(req.params.course_id);
+
+    const removeCourseIndex = courses.map( s => s.Id).indexOf(removeCourseId);
+    courses.splice(removeCourseIndex, 1);
+
+    res.json(courses);
+})
+
 module.exports = router;
