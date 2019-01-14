@@ -29,8 +29,6 @@ const students =
         }
     ]
 
-router.get('/test', (req, res) => res.json({msg:'Routes Works'}));
-
 router.get('/', (req, res) => res.json(students));
 
 router.post("/", (req, res) => {

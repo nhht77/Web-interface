@@ -31,4 +31,26 @@ router.post("/", (req, res) => {
     res.status(201).json(courses);
 });
 
+router.get("/:course_id", (req, res) => {
+    let selectedCourseId = parseInt(req.params.course_id);
+
+    const selectedCourse = courses.filter( s => {
+        if(s.Id === selectedCourseId){
+            return s;
+        } 
+    })
+
+    res.json(selectedCourse);
+})
+
+router.put("/:course_id", (req, res) => {
+    let Id = parseInt(req.params.course_id);
+    const {Name, Description} = req.body
+
+    const updateCourseIndex = courses.map( s => s.Id).indexOf(Id);
+    courses[updateCourseIndex] = { Id, Name, Description }
+
+    res.status(202).json(courses);
+})
+
 module.exports = router;
