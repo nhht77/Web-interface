@@ -1,9 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const students = {
-    
-    studentsData : 
+const students = 
     [
         {
             name:"Veli-Matti Lilja",
@@ -30,7 +28,6 @@ const students = {
             Id: 4
         }
     ]
-}
 
 router.get('/test', (req, res) => res.json({msg:'Routes Works'}));
 
@@ -39,9 +36,9 @@ router.get('/', (req, res) => res.json(students));
 router.post("/", (req, res) => {
 
     const {Name, Address, Class} = req.body
-    const Id = students.studentsData.length + 1 ;
+    const Id = students.length + 1 ;
 
-    students.studentsData.push({Name, Address, Class, Id});
+    students.push({Name, Address, Class, Id});
     res.status(201).json(students);
 });
 
@@ -49,7 +46,7 @@ router.post("/", (req, res) => {
 router.get("/:students_id", (req, res) => {
     let selectedStudentId = parseInt(req.params.students_id);
 
-    const selectedStudent = students.studentsData.filter( s => {
+    const selectedStudent = students.filter( s => {
         if(s.Id === selectedStudentId){
             return s;
         } 
@@ -62,8 +59,8 @@ router.put("/:students_id", (req, res) => {
     let Id = parseInt(req.params.students_id);
     const { Name, Address, Class } = req.body;
 
-    const updateStudentIndex = students.studentsData.map( s => s.Id).indexOf(Id);
-    students.studentsData[updateStudentIndex] = { Name, Address, Class, Id }
+    const updateStudentIndex = students.map( s => s.Id).indexOf(Id);
+    students[updateStudentIndex] = { Name, Address, Class, Id }
 
     res.status(202).json(students);
 })
@@ -71,8 +68,8 @@ router.put("/:students_id", (req, res) => {
 router.delete("/:students_id", (req, res) => {
     let removeStudentId = parseInt(req.params.students_id);
 
-    const removeStudentIndex = students.studentsData.map( s => s.Id).indexOf(removeStudentId);
-    students.studentsData.splice(removeStudentIndex, 1);
+    const removeStudentIndex = students.map( s => s.Id).indexOf(removeStudentId);
+    students.splice(removeStudentIndex, 1);
 
     res.json(students);
 })
