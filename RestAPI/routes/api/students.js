@@ -64,9 +64,17 @@ router.put("/:students_id", (req, res) => {
 
     const updateStudentIndex = students.studentsData.map( s => s.Id).indexOf(Id);
     students.studentsData[updateStudentIndex] = { Name, Address, Class, Id }
-    // students[updateStudentIndex].Id = req.params.updateStudentId;
 
-    res.status(201).json(students);
+    res.status(202).json(students);
+})
+
+router.delete("/:students_id", (req, res) => {
+    let removeStudentId = parseInt(req.params.students_id);
+
+    const removeStudentIndex = students.studentsData.map( s => s.Id).indexOf(removeStudentId);
+    students.studentsData.splice(removeStudentIndex, 1);
+
+    res.json(students);
 })
 
 module.exports = router;
