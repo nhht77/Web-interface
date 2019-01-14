@@ -46,6 +46,27 @@ router.post("/", (req, res) => {
 });
 
 
+router.get("/:students_id", (req, res) => {
+    let selectedStudentId = parseInt(req.params.students_id);
 
+    const selectedStudent = students.studentsData.filter( s => {
+        if(s.Id === selectedStudentId){
+            return s;
+        } 
+    })
+
+    res.json(selectedStudent);
+})
+
+router.put("/:students_id", (req, res) => {
+    let Id = parseInt(req.params.students_id);
+    const { Name, Address, Class } = req.body;
+
+    const updateStudentIndex = students.studentsData.map( s => s.Id).indexOf(Id);
+    students.studentsData[updateStudentIndex] = { Name, Address, Class, Id }
+    // students[updateStudentIndex].Id = req.params.updateStudentId;
+
+    res.status(201).json(students);
+})
 
 module.exports = router;
