@@ -27,6 +27,21 @@ function getCourseById(id, Courses) {
     return selectedCourse;
 }
 
+function addCoursesByStudentId(id, Course) {
+    let selectedStudentId = parseInt(id);
+
+    const selectedStudent = students.filter( s => {
+        if(s.Id === selectedStudentId){
+            return s;
+        } 
+    })
+
+    let newId = selectedStudent[0].Courses.length + 1;    
+    Course.id = newId;
+
+    return selectedStudent[0].Courses.push(Course);
+}
+
 router.get('/', (req, res) => {
     const Course = getCoursesByStudentId(req.params.student_id);
     res.json(Course);
@@ -38,6 +53,10 @@ router.get('/:id_course', (req, res) => {
     
     res.json(selectedCourse);
 });
+
+router.post('/', (req, res) => {
+    res.json(addCoursesByStudentId(req.params.student_id, req.body));
+})
 
 router.put('/:id_course', (req, res) => {
     const { grade, name } = req.body;
