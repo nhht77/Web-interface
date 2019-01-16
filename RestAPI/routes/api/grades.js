@@ -35,7 +35,17 @@ router.get('/', (req, res) => {
 router.get('/:id_course', (req, res) => {
     const Courses = getCoursesByStudentId(req.params.student_id);
     const selectedCourse = getCourseById(req.params.id_course, Courses);
+    
     res.json(selectedCourse);
+})
+
+router.delete('/:id_course', (req, res) => {
+    const Courses = getCoursesByStudentId(req.params.student_id);
+    const removedGradeIndex = Courses.map( c => c.id).indexOf(parseInt(req.params.id_course));
+
+    Courses.splice(removedGradeIndex, 1);
+
+    res.json(Courses);
 })
 
 
