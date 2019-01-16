@@ -1,42 +1,16 @@
 const express = require('express');
 const router  = express.Router();
 
-const students = 
-    [
-        {
-            name:"Veli-Matti Lilja",
-            Address:"Norra Larsmovägen 38 70820 Oulu",
-            Class:"Php",
-            Id: 1
-        },
-        {
-            name:"Erno Virolainen",
-            Address:"Kankaanpääntie 36 94600 KEMI",
-            Class:"Hybrid Application",
-            Id: 2
-        },
-        {
-            name:"Kaarina Autio",
-            Address:"Ysitie 25 33420 TAMPERE",
-            Class:"ReactJS",
-            Id: 3
-        },
-        {
-            Name:"Tuulia Karppinen",
-            Address:"Suometsäntie 17 00750 HELSINKI",
-            Class:"Hybrid Application",
-            Id: 4
-        }
-    ]
+const students = require('../../models/students');
 
 router.get('/', (req, res) => res.json(students));
 
 router.post("/", (req, res) => {
 
-    const {Name, Address, Class} = req.body
+    const {Name, Address, Courses} = req.body
     const Id = students.length + 1 ;
 
-    students.push({Name, Address, Class, Id});
+    students.push({ Id ,Name, Address, Courses});
     res.status(201).json(students);
 });
 
@@ -55,10 +29,10 @@ router.get("/:students_id", (req, res) => {
 
 router.put("/:students_id", (req, res) => {
     let Id = parseInt(req.params.students_id);
-    const { Name, Address, Class } = req.body;
+    const { Name, Address, Courses } = req.body;
 
     const updateStudentIndex = students.map( s => s.Id).indexOf(Id);
-    students[updateStudentIndex] = { Name, Address, Class, Id }
+    students[updateStudentIndex] = { Name, Address, Courses, Id }
 
     res.status(202).json(students);
 })
