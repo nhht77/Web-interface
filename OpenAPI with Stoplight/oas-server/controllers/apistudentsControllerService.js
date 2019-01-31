@@ -88,5 +88,5 @@ module.exports.funcapistudentsPOST = function funcapistudentsPOST(req, res, next
   //   const id = students.length + 1 ;
 
   //   students.push({ id , name, address, courses});
-    res.status(201).json(req.body);
+    res.send({msg:"HAHAHAHAHAHA!!!!!"});
 };
