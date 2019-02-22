@@ -1,0 +1,792 @@
+openapi: 3.0.0
+info:
+  title: School API
+  version: '1.0'
+  description: Get Basic Academic Information Through School API
+paths:
+  /api/students/:
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    Name:
+                      type: string
+                    Address:
+                      type: string
+                    Courses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          grade:
+                            type: string
+                          name:
+                            type: string
+      summary: Get all students infomations
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    courses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          grade:
+                            type: number
+                          name:
+                            type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Veli-Matti Lilja
+                      address: Norra Larsmovägen 38 70820 Oulu
+                      courses:
+                        - id: 1
+                          grade: 5
+                          name: Php
+                        - id: 2
+                          grade: 3
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 4
+                          name: ReactJS
+                    - id: 2
+                      name: Erno Virolainen
+                      address: Kankaanpääntie 36 94600 KEMI
+                      courses:
+                        - id: 1
+                          grade: 3
+                          name: Php
+                        - id: 3
+                          grade: 3
+                          name: ReactJS
+                    - id: 3
+                      name: Kaarina Autio
+                      address: Ysitie 25 33420 TAMPERE
+                      courses:
+                        - id: 2
+                          grade: 0
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 2
+                          name: ReactJS
+        '400':
+          description: ''
+      summary: Add a new student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                address:
+                  type: string
+                name:
+                  type: string
+                courses:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: number
+                    name:
+                      type: string
+        x-examples:
+          application/json:
+            id: 3
+            name: Kaarina Autio
+            address: Ysitie 25 33420 TAMPERE
+            courses:
+              - id: 2
+                grade: 0
+                name: Hybrid Application
+              - id: 3
+                grade: 2
+                name: ReactJS
+  '/api/students/{students_id}':
+    put:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    courses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          grade:
+                            type: number
+                          name:
+                            type: string
+              examples:
+                response:
+                  value:
+                    - Id: 1
+                      name: Veli-Matti Lilja
+                      Address: Norra Larsmovägen 38 70820 Oulu
+                      Courses:
+                        - id: 1
+                          grade: 5
+                          name: Php
+                        - id: 2
+                          grade: 3
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 4
+                          name: ReactJS
+                    - id: 2
+                      name: Erno Virolainen
+                      address: Kankaanpääntie 36 94600 KEMI
+                      courses:
+                        - id: 1
+                          grade: 3
+                          name: Php
+                        - id: 3
+                          grade: 3
+                          name: ReactJS
+                    - id: 3
+                      name: Kaarina
+                      address: Ysitie 25 TAMPERE
+                      courses:
+                        - id: 2
+                          grade: 4
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 5
+                          name: ReactJS
+        '404':
+          description: ''
+      summary: Update Student by id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  address:
+                    type: string
+                  courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        grade:
+                          type: number
+                        name:
+                          type: string
+        x-examples:
+          application/json:
+            id: 3
+            name: Kaarina
+            address: Ysitie 25 TAMPERE
+            courses:
+              - id: 2
+                grade: 4
+                name: Hybrid Application
+              - id: 3
+                grade: 5
+                name: ReactJS
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    courses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          grade:
+                            type: number
+                          name:
+                            type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Veli-Matti Lilja
+                      address: Norra Larsmovägen 38 70820 Oulu
+                      courses:
+                        - id: 1
+                          grade: 5
+                          name: Php
+                        - id: 2
+                          grade: 3
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 4
+                          name: ReactJS
+                    - id: 3
+                      name: Kaarina Autio
+                      address: Ysitie 25 33420 TAMPERE
+                      courses:
+                        - id: 2
+                          grade: 0
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 2
+                          name: ReactJS
+      summary: Get Student By id
+    delete:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: ''
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    courses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          grade:
+                            type: number
+                          name:
+                            type: string
+              examples:
+                response:
+                  value:
+                    - Id: 1
+                      name: Veli-Matti Lilja
+                      Address: Norra Larsmovägen 38 70820 Oulu
+                      Courses:
+                        - id: 1
+                          grade: 5
+                          name: Php
+                        - id: 2
+                          grade: 3
+                          name: Hybrid Application
+                        - id: 3
+                          grade: 4
+                          name: ReactJS
+      summary: Delete A Student By id
+      parameters:
+        - in: path
+          name: students_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+  /api/courses:
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: string
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Php
+                      description: Learning To Code Backend
+                    - id: 2
+                      name: Hybrid Application
+                      description: Learning to Code Mobile Hybrid App
+      summary: Get all courses
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: string
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Php
+                      description: Learning To Code Backend
+                    - id: 2
+                      name: Hybrid Application
+                      description: Learning to Code Mobile Hybrid App
+                    - id: 3
+                      name: ReactJS
+                      description: Learning to Code Javascript Frontend Framework
+      summary: Post new course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                grade:
+                  type: string
+                name:
+                  type: string
+        x-examples:
+          application/json:
+            id: 3
+            name: ReactJS
+            description: Learning to Code Javascript Frontend Framework
+  '/api/courses/{course_id}':
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  grade:
+                    type: number
+                  name:
+                    type: string
+              examples:
+                response:
+                  value:
+                    id: 2
+                    name: Hybrid Application
+                    description: Learning to Code Mobile Hybrid App
+        '400':
+          description: ''
+        '404':
+          description: ''
+      summary: Get Course By id
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+    put:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: ''
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: string
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Php
+                      description: Learning To Code Backend
+                    - id: 2
+                      name: Native Mobile Application
+                      description: Learning to Code Mobile Native Mobile App
+        '404':
+          description: ''
+      summary: Update Course By id
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                grade:
+                  type: number
+                name:
+                  type: string
+        x-examples:
+          application/json:
+            id: 2
+            name: Native Mobile Application
+            description: Learning to Code Mobile Native Mobile App
+    delete:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: ''
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: string
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      name: Php
+                      description: Learning To Code Backend
+      summary: Delete Course By id
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+  '/api/students/:student_id/courses':
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: number
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      grade: 5
+                      name: Php
+                    - id: 2
+                      grade: 3
+                      name: Hybrid Application
+      summary: Get All Course of Student by Student id
+      parameters:
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: string
+            default: '1'
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: number
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      grade: 5
+                      name: Php
+                    - id: 2
+                      grade: 3
+                      name: Hybrid Application
+                    - id: 3
+                      grade: 4
+                      name: ReactJS
+      summary: Post a new course that student attend
+      parameters:
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: number
+            default: '1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                grade:
+                  type: number
+                name:
+                  type: string
+        x-examples:
+          application/json:
+            id: 3
+            grade: 4
+            name: ReactJS
+  '/api/students/:student_id/courses/{course_id}':
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+              examples:
+                response:
+                  value:
+                    id: 2
+                    grade: 3
+                    name: Hybrid Application
+        '400':
+          description: ''
+        '404':
+          description: ''
+      summary: Get Course by Course Id from A Student
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: number
+            default: '1'
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+    put:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    grade:
+                      type: number
+                    name:
+                      type: string
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      grade: 3
+                      name: Php
+                    - id: 2
+                      grade: 5
+                      name: Native Mobile Application
+        '400':
+          description: ''
+        '404':
+          description: ''
+      summary: Update Student Course by Course Id and Student Id
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: string
+            default: '2'
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: string
+            default: '1'
+    delete:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+              examples:
+                response:
+                  value:
+                    - id: 1
+                      grade: 5
+                      name: Php
+      summary: Delete Student Course by Student id and Course id
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          schema:
+            type: number
+            default: '2'
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: number
+            default: '1'
+servers:
+  - url: 'http://shoolExample.com'
+  - url: 'https://shoolExample.com'
