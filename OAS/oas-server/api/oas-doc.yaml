@@ -134,7 +134,7 @@ paths:
               - id: 3
                 grade: 2
                 name: ReactJS
-  '/api/students/{students_id}':
+  '/api/students/{student_id}':
     put:
       responses:
         '200':
@@ -209,6 +209,13 @@ paths:
         '404':
           description: ''
       summary: Update Student by id
+      parameters:
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: number
+            default: '2'
       requestBody:
         content:
           application/json:
@@ -308,6 +315,13 @@ paths:
                           grade: 2
                           name: ReactJS
       summary: Get Student By id
+      parameters:
+        - in: path
+          name: student_id
+          required: true
+          schema:
+            type: number
+            default: '2'
     delete:
       responses:
         '200':
@@ -364,7 +378,7 @@ paths:
       summary: Delete A Student By id
       parameters:
         - in: path
-          name: students_id
+          name: student_id
           required: true
           schema:
             type: number

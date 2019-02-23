@@ -85,33 +85,25 @@ module.exports.addStudents = data => {
 }
 
 
-// module.exports.get("/:students_id", (req, res) => {
-//     let selectedStudentId = parseInt(req.params.students_id);
+module.exports.getStudent = id => 
+    selectedStudent = students.filter( s => {
+        if(s.Id === id){
+            return s;
+        } 
+    })
 
-//     const selectedStudent = students.filter( s => {
-//         if(s.Id === selectedStudentId){
-//             return s;
-//         } 
-//     })
+module.exports.updateStudent = (id, data) => {
+    const Id = id;
+    const { Name, Address, Courses } = data;
 
-//     res.json(selectedStudent);
-// })
+    const updateStudentIndex = students.map( s => s.Id).indexOf(id);
+    students[updateStudentIndex] = { Id, Name, Address, Courses }
 
-// module.exports.put("/:students_id", (req, res) => {
-//     let Id = parseInt(req.params.students_id);
-//     const { Name, Address, Courses } = req.body;
+    return students;
+}
 
-//     const updateStudentIndex = students.map( s => s.Id).indexOf(Id);
-//     students[updateStudentIndex] = { Name, Address, Courses, Id }
-
-//     res.status(202).json(students);
-// })
-
-// module.exports.delete("/:students_id", (req, res) => {
-//     let removeStudentId = parseInt(req.params.students_id);
-
-//     const removeStudentIndex = students.map( s => s.Id).indexOf(removeStudentId);
-//     students.splice(removeStudentIndex, 1);
-
-//     res.json(students);
-// })
+module.exports.deleteStudent = id => {
+    const removeStudentIndex = students.map( s => s.Id).indexOf(id);
+    students.splice(removeStudentIndex, 1);
+    return students;
+}
