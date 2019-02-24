@@ -1,9 +1,91 @@
-const express = require('express');
-const router  = express.Router({mergeParams: true});
+const students = 
+    [
+        {
+            Id: 1,
+            name:"Veli-Matti Lilja",
+            Address:"Norra Larsmovägen 38 70820 Oulu",
+            Courses:[
+                {   
+                    id: 1,
+                    grade: 5,
+                    name: "Php",
+                },
+                {
+                    id: 2,
+                    grade:3,
+                    name: "Hybrid Application",
+                },
+                {
+                    id: 3,
+                    grade:4,
+                    name:"ReactJS",
+                }
+            ],
+        },
+        {
+            Id: 2,
+            name:"Erno Virolainen",
+            Address:"Kankaanpääntie 36 94600 KEMI",
+            Courses:[
+                {
+                    id: 1,
+                    grade: 3,
+                    name: "Php",
+                },
+                {
+                    id:2,
+                    grade:3,
+                    name:"ReactJS",
+                }
+            ],
+        },
+        {
+            Id: 3,
+            name:"Kaarina Autio",
+            Address:"Ysitie 25 33420 TAMPERE",
+            Courses:[
+                {
+                    id:1,
+                    grade:0,
+                    name: "Hybrid Application",
+                },
+                {
+                    id:2,
+                    grade:2,
+                    name:"ReactJS",
+                }
+            ],
+        },
+        {
+            Id: 4,
+            Name:"Tuulia Karppinen",
+            Address:"Suometsäntie 17 00750 HELSINKI",
+            Courses:[
+                {
+                    id:1,
+                    grade: 2,
+                    name: "Php",
+                },
+                {
+                    id:2,
+                    grade:0,
+                    name: "Hybrid Application",
+                }
+            ],
+        }
+    ];
 
-const students = require('../../models/students');
+getCoursesByStudentId = (id) => {
+    let selectedStudentId = parseInt(id);
+    const selectedStudent = students.filter( s => {
+        if(s.Id === selectedStudentId){
+            return s;
+        } 
+    })
+    return selectedStudent[0].Courses;
+}
 
-function getCoursesByStudentId(id) {
+module.exports.getCoursesByStudentId = (id) => {
     let selectedStudentId = parseInt(id);
 
     const selectedStudent = students.filter( s => {
@@ -15,23 +97,17 @@ function getCoursesByStudentId(id) {
     return selectedStudent[0].Courses;
 }
 
-function getCourseById(id, Courses) {
-    let selectedCourseId = parseInt(id);
-
-    const selectedCourse = Courses.filter( s => {
-        if(s.id === selectedCourseId){
+module.exports.getCourseById = (id, Courses) => 
+     selectedCourse = Courses.filter( s => {
+        if(s.id === id){
             return s;
         } 
-    })
+    });
 
-    return selectedCourse;
-}
 
-function addCoursesByStudentId(id, Course) {
-    let selectedStudentId = parseInt(id);
-
+module.exports.addCoursesByStudentId = (id, Course) => {
     const selectedStudent = students.filter( s => {
-        if(s.Id === selectedStudentId){
+        if(s.Id === id){
             return s;
         } 
     })
@@ -42,43 +118,17 @@ function addCoursesByStudentId(id, Course) {
     return selectedStudent[0].Courses.push(Course);
 }
 
-router.get('/', (req, res) => {
-    const Course = getCoursesByStudentId(req.params.student_id);
-    res.json(Course);
-})
+module.exports.updateStudentGrade = (student_id, course_id, data) => {
+    const { grade, name } = data;
+    const Courses = getCoursesByStudentId(student_id);
+    const updateGradeIndex = Courses.map( c => c.id).indexOf(course_id);
+    Courses[updateGradeIndex] = { id, grade, name };
+    return Courses;  
+};
 
-router.get('/:id_course', (req, res) => {
-    const Courses = getCoursesByStudentId(req.params.student_id);
-    const selectedCourse = getCourseById(req.params.id_course, Courses);
-    
-    res.json(selectedCourse);
-});
-
-router.post('/', (req, res) => {
-    res.json(addCoursesByStudentId(req.params.student_id, req.body));
-})
-
-router.put('/:id_course', (req, res) => {
-    const { grade, name } = req.body;
-
-    const id  = parseInt(req.params.id_course);
-    const Courses = getCoursesByStudentId(req.params.student_id);
-
-    const removedGradeIndex = Courses.map( c => c.id).indexOf(parseInt(id));
-    Courses[removedGradeIndex] = { id, grade, name };
-    
-    res.json(Courses);
-});
-
-router.delete('/:id_course', (req, res) => {
-    const Courses = getCoursesByStudentId(req.params.student_id);
-    const removedGradeIndex = Courses.map( c => c.id).indexOf(parseInt(req.params.id_course));
-
+module.exports.deleteGrades = (student_id, course_id) => {
+    const Courses = getCoursesByStudentId(student_id);
+    const removedGradeIndex = Courses.map( c => c.id).indexOf(parseInt(course_id));
     Courses.splice(removedGradeIndex, 1);
-
-    res.json(Courses);
-})
-
-
-
-module.exports = router;
+    return Courses;
+}
