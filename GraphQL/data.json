@@ -1,0 +1,72 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@gmail.com",
+      "age": 36
+    },
+    {
+      "id": "2",
+      "name": "Keith Wilson",
+      "email": "kieth@gmail.com",
+      "age": 50
+    },
+    {
+      "id": "3",
+      "name": "Tim",
+      "email": "timCook@gmail.com",
+      "age": 22
+    },
+    {
+      "id": "5",
+      "name": "Jen Thompson",
+      "email": "jen@gmail.com",
+      "age": 22
+    },
+    {
+      "name": "Harry White",
+      "email": "harry@gmail.com",
+      "age": 34,
+      "id": "rytP7hhUW"
+    },
+    {
+      "name": "Harry White",
+      "email": "harry@gmail.com",
+      "age": 45,
+      "id": "EAzEIz0"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "name": "Mobile Application",
+      "description": "Learning to program android"
+    },
+    {
+      "id": "2",
+      "name": "Web Interface",
+      "description": "Learning to create and consume API data"
+    },
+    {
+      "id": "3",
+      "name": "Project Internet Plan",
+      "description": "Making Project from business ideas"
+    },
+    {
+      "id": "4",
+      "name": "Mobile Physics",
+      "description": "Making good use of mobile sensor"
+    },
+    {
+      "name": "String!",
+      "description": "String!",
+      "id": "r0VIiGW"
+    },
+    {
+      "name": "React",
+      "description": "React",
+      "id": "2UyVird"
+    }
+  ]
+}
